@@ -10,8 +10,9 @@ export default function reducer(state = {
             var addsNew=["Kup to","Vezmi to","Nakupuj hned"];
             return {...state, adds: addsNew};
         case 'ADD_ADD':
-            var addNew={...state.adds};
+            var addNew=state.adds.slice();
             addNew.push(action.add);
             return {...state, adds: addNew};
     }
+    return state;
 }

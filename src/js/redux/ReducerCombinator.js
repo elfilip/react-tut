@@ -3,7 +3,7 @@
  */
 import {combineReducers} from "redux";
 
-import addsReducer from "AddsReducer";
+import addsReducer from "./AddsReducer";
 
 const AddsReducers = combineReducers({
     addsReducer
