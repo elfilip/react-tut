@@ -13,16 +13,24 @@ export default class SubFilip extends React.Component {
         };
     }
 
-    handleState(prop){
-        console.log("nastavuje "+prop)
-        this.state={
-            add:prop
+    handleState(event){
+        console.log("handleState")
+        console.log(this.props)
+        this.props.deleteAdd(this.props.id_comp);
+    }
+
+    showId(){
+        if(this.props.show_id === true){
+            return this.props.id_comp;
+        }else{
+            return "";
         }
     }
 
+
+
     render() {
-        console.log("Props je");
-        console.log(this.props)
-        return (<div>Prvek: {this.state.add}</div>);
+        return (<div>Prvek:{this.showId()} {this.state.add}<button id="aaa" onClick={ this.handleState.bind(this)}>Smaž</button></div>);
+        //return (<div>Prvek: {this.state.add}</div>);
     }
 }

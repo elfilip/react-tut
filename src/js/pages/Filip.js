@@ -4,7 +4,7 @@
 import React from "react";
 
 import SubFilip from "./SubFilip"
-import {addLoad,addAdd} from "../redux/AddsAction"
+import {addLoad,addAdd,addRemove} from "../redux/AddsAction"
 import  {connect}  from "react-redux"
 
 class Filip extends React.Component {
@@ -13,6 +13,10 @@ class Filip extends React.Component {
         this.state = {
             title: "Vítejte",
         };
+    }
+
+    componentWillMount() {
+      //  this.props.dispatch(addLoad());
     }
 
     handleState(event) {
@@ -28,18 +32,26 @@ class Filip extends React.Component {
         this.setState({addNewInput: event.target.value})
     }
 
-    handleSubmit(event){
-        console.log('handleSubmit')
+    handleSubmit(){
+        console.log('handleSubmit'+ this.state.addNewInput)
         this.props.dispatch(addAdd(this.state.addNewInput))
     }
+
+    deleteAdd(id){
+        this.props.dispatch(addRemove(id));
+        console.log("Mazu zaznam. "+id);
+    }
     render() {
-        this.props.dispatch(addLoad());
+
         console.log("store adds");
         console.log(this.props.adds);
         const adds = ["Total sale", "mega sale", "ultra sale"];
-        var subFilip = adds.map(function (currentValue, index) {
-            return <SubFilip key={index} add={currentValue}/>;
+        const subFilip = adds.map(function (currentValue, index) {
+            return <SubFilip key={index} add={currentValue} id_comp="10"/>;
         });
+
+        const reduxAdds= this.props.adds.map((add,index) => <SubFilip show_id={this.props.show_id} key={add.id} add={add.text} id_comp={add.id} deleteAdd={this.deleteAdd.bind(this)}/>);
+
         return (
             <div>
                 <div>{this.state.title}</div>
@@ -47,14 +59,8 @@ class Filip extends React.Component {
                     <input onChange={this.handleNewAddInput.bind(this)}/>
                     <button type="submit" value="Submit">Přidej</button>
                 </form>
-                {this.props.adds}
-                <SubFilip ref="x1" add="Buy now !!!"/>
-                <SubFilip add="Sell immediately !"/>
-                <SubFilip add="Do nothing."/>
                 <input onKeyDown={this.handleState.bind(this)}/>
-                <div>
-                    {subFilip}
-                </div>
+                {reduxAdds}
             </div>
         );
 
@@ -63,7 +69,8 @@ class Filip extends React.Component {
 
 export default connect(function (store) {
     return {
-        adds: store.addsReducer.adds
+        adds: store.addsReducer.adds,
+        show_id: store.settingsReducer.showID
     }
 })(Filip)
 

@@ -11,3 +11,10 @@ export function addAdd(text) {
         text: text
     }
 }
+
+export function addRemove(id) {
+    return {
+        type: 'ADD_REMOVE',
+        id: id
+    };
+}

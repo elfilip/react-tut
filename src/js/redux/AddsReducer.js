@@ -3,16 +3,24 @@
  */
 
 export default function reducer(state = {
-    adds: []
+    adds: [],
+    counter: 0
 }, action){
     switch (action.type) {
         case 'ADD_LOAD':
-            var addsNew=["Kup to","Vezmi to","Nakupuj hned"];
+            var addsNew=[{id: state.counter++, text: "Kup to"} ,{id: state.counter++, text: "Vezmi to"},{id: state.counter++, text: "Nakupuj hned"}];
             return {...state, adds: addsNew};
         case 'ADD_ADD':
-            var addNew=state.adds.slice();
-            addNew.push(action.add);
-            return {...state, adds: addNew};
+            var addsNew=state.adds.slice();
+            var add={
+                id: state.counter++,
+                text:action.text
+            }
+            addsNew.push(add);
+            return {...state, adds: addsNew};
+        case 'ADD_REMOVE':
+            return {...state, adds: state.adds.filter(element => element.id !== action.id)};
+
     }
     return state;
 }
