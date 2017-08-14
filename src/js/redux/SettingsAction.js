@@ -8,7 +8,7 @@ export function toggleShowID() {
 export function asyncOp() {
    return function (dispatch) {
         dispatch(asyncStart());
-        setTimeout(new function () {
+        setTimeout(function () {
             dispatch(asyncComplete());
         }, 3000)
     }
@@ -19,6 +19,6 @@ export function asyncStart() {
 }
 
 export function asyncComplete() {
-    return {type: 'ASYNC_STOP'}
+    return {type: 'ASYNC_COMPLETE'}
 }
 
