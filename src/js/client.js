@@ -19,7 +19,7 @@ ReactDOM.render(
                 <IndexRoute component={Featured}></IndexRoute>
                 <Route path="archives(/:article)" name="archives" component={Archives}></Route>
                 <Route path="settings" name="settings" component={Settings}></Route>
-                <Route path="filip" add="Buy now !!!" name="filipek" component={Filip}></Route>
+                <Route path="filip" add="Buy now !!!" name="filip" component={Filip}></Route>
             </Route>
         </Router>
     </Provider>,

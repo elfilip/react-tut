@@ -4,11 +4,13 @@
 import {combineReducers} from "redux";
 
 import addsReducer from "./AddsReducer";
-import settingsReducer from "./SettingsReducer"
+import settingsReducer from "./SettingsReducer";
+import restReducer from "./RestReducer";
 
 const AddsReducers = combineReducers({
     addsReducer,
-    settingsReducer
+    settingsReducer,
+    restReducer
 });
 
 export default AddsReducers;
